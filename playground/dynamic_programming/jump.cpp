@@ -4,6 +4,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <limits.h>
+#include <algorithm>
 
 int minJumps(int arr[], int start, int end) {
   if (end == start) return 0;
@@ -22,7 +23,25 @@ int minJumps(int arr[], int start, int end) {
 
 
 // function to solve this in O(n) time complexity
-int minJump(int arr[], start) {
+int minJumps2(int arr[], int n) {
+  if (n <= 1) return 0;
+  if (arr[0] == 0) return -1;
+
+  int maxR = arr[0];
+  int step = arr[0];
+  int jump = 1;
+
+  for (int i = 1; i < n; i++) {
+    if (i == n - 1) return jump;
+    maxR = std::max(maxR, i+arr[i]);
+    step--;
+
+    if (step == 0) {
+      jump++;
+      if (i >= maxR) return -1;
+      step = maxR - i;
+    }
+  }
   return 0;
 }
 
@@ -31,5 +50,6 @@ int main() {
   int arr[] = {1, 3, 6, 3, 2, 3, 6, 8, 9, 5};
   int n = sizeof(arr)/sizeof(arr[0]);
   printf("Min number of jumps %d\n", minJumps(arr, 0, n - 1));
+  printf("Min number of jumps %d\n", minJumps2(arr, n));
   return 0;
 }
