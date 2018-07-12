@@ -20,6 +20,12 @@ int minJumps(int arr[], int start, int end) {
   return min;
 }
 
+
+// function to solve this in O(n) time complexity
+int minJump(int arr[], start) {
+  return 0;
+}
+
 int main() {
   // int arr[] = {2, 5, 0, 0};
   int arr[] = {1, 3, 6, 3, 2, 3, 6, 8, 9, 5};
