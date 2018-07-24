@@ -6,25 +6,25 @@ from heapq import heappop, heappush
 
 def dijkstra(edges, f, t):
   g = defaultdict(list)
-    for l, r, c in edges:
-      g[l].append((c, r))
+  for l, r, c in edges:
+    g[l].append((c, r))
 
-    q, seen, dist = [(0, f, ())], set(), {f: 0}
-    while q:
-      (cost, v1, path) = heappop(q)
-        if v1 not in seen:
-          seen.add(v1)
-            path += (v1,)
-            if v1 == t: return (cost, path)
+  q, seen, dist = [(0, f, ())], set(), {f: 0}
+  while q:
+    (cost, v1, path) = heappop(q)
+    if v1 not in seen:
+      seen.add(v1)
+      path += (v1,)
+      if v1 == t: return (cost, path)
 
-            for c, v2 in g.get(v1, ()):
-              if v2 in seen: continue
+      for c, v2 in g.get(v1, ()):
+        if v2 in seen: continue
 
-                if v2 not in dist or cost + c < dist[v2]:
-                  dist[v2] = cost + c
-                    heappush(q, (cost+c, v2, path))
+        if v2 not in dist or cost + c < dist[v2]:
+          dist[v2] = cost + c
+          heappush(q, (cost+c, v2, path))
 
-    return float("inf")
+  return float("inf")
 
 
 if __name__ == "__main__":
@@ -43,6 +43,6 @@ if __name__ == "__main__":
       ]
 
   print("A -> E:")
-    print(dijkstra(edges, "A", "E"))
-    print("A -> G:")
-    print(dijkstra(edges, "A", "G"))
+  print(dijkstra(edges, "A", "E"))
+  print("A -> G:")
+  print(dijkstra(edges, "A", "G"))
